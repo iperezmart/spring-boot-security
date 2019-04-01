@@ -13,6 +13,7 @@ public class LoginController {
 
 	@GetMapping("/login")
 	public String login(@RequestParam(value="error", required=false) String error, 
+			@RequestParam(value="logout", required=false) String logout, 
 			Model model, Principal principal, RedirectAttributes flash) {
 		if (principal != null) {
 			// Ya se inició sesión previamente...
@@ -20,7 +21,10 @@ public class LoginController {
 			return "redirect:/";
 		}
 		
-		if(error != null) {
+		if (logout != null) {
+			model.addAttribute("success", "Session logout successfully.");
+		}
+		if (error != null) {
 			model.addAttribute("error", "Login error. User or password incorrect.");
 		}
 		return "login";
