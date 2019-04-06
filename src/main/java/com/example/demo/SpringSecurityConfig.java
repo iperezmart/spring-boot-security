@@ -10,8 +10,13 @@ import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.example.demo.authHandler.LoginSuccessHandler;
+
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	private LoginSuccessHandler successHandler;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -21,7 +26,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/admin/**").hasAnyRole("ADMIN")							// Rutas solo accesibles para roles ADMIN
 			.anyRequest().authenticated()
 			.and()
-			.formLogin().loginPage("/login").permitAll()							// Login, acceso para todos
+			.formLogin()
+			.successHandler(successHandler)											// Para pasar un mensaje personalizado al iniciar sesión con éxito
+			.loginPage("/login").permitAll()										// Login, acceso para todos
 			.and()
 			.logout().permitAll()													// Logout, acceso para todos
 			.and()
