@@ -18,6 +18,9 @@
 			<h1 th:text="${message}"></h1>
 			<h2>Message from template...</h2>
 		</div>
+		
+		<a th:href="@{/user/}" class="btn">/user</a>
+		<a th:href="@{/admin/}" class="btn">/admin</a>
 	</div>
 	
 	<footer th:replace="layout/layout :: footer"></footer>

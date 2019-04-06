@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/style.css}"></link>
+<title th:text="${title}"></title>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="card bg-danger text-white">
+			<div class="card-header">Error: Access denied!</div>
+			<div class="card-body">
+				<h5 class="card-title">
+					Sorry <span th:text="${#authentication.name}"></span>&nbsp;(<span
+						th:text="${#httpServletRequest.remoteUser}"></span>), you have not
+					access to this resource
+				</h5>
+				<a th:href="@{/}" class="btn btn-outline-light">Go home</a>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
