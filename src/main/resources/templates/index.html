@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="ISO-8859-1" />
 <link rel="stylesheet"
@@ -19,8 +19,8 @@
 			<h2>Message from template...</h2>
 		</div>
 		
-		<a th:href="@{/user/}" class="btn">/user</a>
-		<a th:href="@{/admin/}" class="btn">/admin</a>
+		<a sec:authorize="hasRole('USER')" th:href="@{/user/}" class="btn">/user</a>
+		<a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/}" class="btn">/admin</a>
 	</div>
 	
 	<footer th:replace="layout/layout :: footer"></footer>
