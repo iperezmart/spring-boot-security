@@ -21,6 +21,7 @@
 		
 		<a sec:authorize="hasRole('USER')" th:href="@{/user/}" class="btn">/user</a>
 		<a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/}" class="btn">/admin</a>
+		<a sec:authorize="hasRole('USER')" th:href="@{/authTest/}" class="btn">/authTest</a>
 	</div>
 	
 	<footer th:replace="layout/layout :: footer"></footer>

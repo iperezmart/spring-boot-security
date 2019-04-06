@@ -3,6 +3,7 @@ package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.demo.authHandler.LoginSuccessHandler;
 
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
@@ -24,6 +26,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/", "/css/**", "/js/**", "/images/**").permitAll()		// Rutas sin autorización
 			.antMatchers("/user/**").hasAnyRole("USER")								// Rutas solo accesibles para roles USER
 			.antMatchers("/admin/**").hasAnyRole("ADMIN")							// Rutas solo accesibles para roles ADMIN
+			// The authorization for /authTest is defined via annotations...
 			.anyRequest().authenticated()
 			.and()
 			.formLogin()
