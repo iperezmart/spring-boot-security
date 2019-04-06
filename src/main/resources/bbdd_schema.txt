@@ -1,0 +1,40 @@
+-- Volcando estructura de base de datos para db_springboot
+CREATE DATABASE IF NOT EXISTS `db_springboot` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `db_springboot`;
+
+-- Volcando estructura para tabla db_springboot.authorities
+CREATE TABLE IF NOT EXISTS `authorities` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `authority` varchar(50) DEFAULT NULL COMMENT 'Rol',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_user_id` (`id`,`user_id`),
+  KEY `FK_authorities_users` (`user_id`),
+  CONSTRAINT `FK_authorities_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla db_springboot.authorities: ~0 rows (aproximadamente)
+DELETE FROM `authorities`;
+/*!40000 ALTER TABLE `authorities` DISABLE KEYS */;
+INSERT INTO `authorities` (`id`, `user_id`, `authority`) VALUES
+	(1, 1, 'ROLE_USER'),
+	(2, 2, 'ROLE_USER'),
+	(3, 2, 'ROLE_ADMIN');
+/*!40000 ALTER TABLE `authorities` ENABLE KEYS */;
+
+-- Volcando estructura para tabla db_springboot.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `enabled` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla db_springboot.users: ~2 rows (aproximadamente)
+DELETE FROM `users`;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `username`, `password`, `enabled`) VALUES
+	(1, 'user', '$2a$10$w2yg3X4hLV7OyoX7ZHOxj.wmiyXoG74RxLozyXvlpBhsgdIbHSniy', 1),
+	(2, 'admin', '$2a$10$l4d2St9CFty43.czX.VTjOaNToIiQ17jRkJPBCdVx4UNeCPzsCmeC', 1);
