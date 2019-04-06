@@ -23,8 +23,15 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 		// TODO Auto-generated method stub
 		SessionFlashMapManager flashMapManager = new SessionFlashMapManager();
 		FlashMap flashMap = new FlashMap();
-		flashMap.put("success", "Your session has been started correctly! (from SuccessHandler)");
+		flashMap.put("success", "Hello " + 
+				authentication.getName() + 
+				", your session has been started correctly! (from SuccessHandler)");
 		flashMapManager.saveOutputFlashMap(flashMap, request, response);
+		
+		if (authentication != null) {
+			logger.info("The user '" + authentication.getName() + "' has been started a session successfully");
+		}
+		
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
 	
